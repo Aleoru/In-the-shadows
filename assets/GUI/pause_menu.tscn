@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4fs0smn6vnpq"]
+
+[ext_resource type="Script" path="res://assets/scripts/GUI/pause_menu.gd" id="1_oqnhf"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_oqnhf")
+user_interface = "res://assets/GUI/user_interface.tscn"
+main_menu_gui = "res://assets/GUI/main_menu_gui.tscn"
+main_menu = "res://assets/scenes/MainMenu.tscn"
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Hint" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Hint
+"
+horizontal_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/Options"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/Options/GridContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Continue" type="Button" parent="MarginContainer/Options/GridContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Continue"
+
+[node name="BackToMenu" type="Button" parent="MarginContainer/Options/GridContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Back to menu"
+
+[connection signal="pressed" from="MarginContainer/Options/GridContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/Options/GridContainer/VBoxContainer/BackToMenu" to="." method="_on_back_to_menu_pressed"]

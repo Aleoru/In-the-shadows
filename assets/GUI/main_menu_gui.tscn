@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3pe0bq55wxau"]
+
+[ext_resource type="Script" path="res://assets/scripts/GUI/main_menu_gui.gd" id="1_shthv"]
+
+[sub_resource type="SystemFont" id="SystemFont_cbb8m"]
+font_names = PackedStringArray("Impact")
+subpixel_positioning = 0
+
+[sub_resource type="SystemFont" id="SystemFont_upc2k"]
+subpixel_positioning = 0
+
+[node name="MainMenuGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_shthv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="Separator" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.85098)
+theme_override_fonts/font = SubResource("SystemFont_cbb8m")
+theme_override_font_sizes/font_size = 64
+text = "In the shadows"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+uppercase = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Separator" type="Control" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Normal mode" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_upc2k")
+theme_override_font_sizes/font_size = 24
+text = "Normal mode"
+
+[node name="Test mode" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_upc2k")
+theme_override_font_sizes/font_size = 24
+text = "Test mode"
+
+[node name="Quit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_upc2k")
+theme_override_font_sizes/font_size = 24
+text = "Quit
+"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Normal mode" to="." method="_on_normal_mode_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Test mode" to="." method="_on_test_mode_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

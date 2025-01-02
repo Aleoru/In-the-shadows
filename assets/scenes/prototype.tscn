@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cckc545f2c8t0"]
+
+[ext_resource type="Script" path="res://assets/scripts/mechanics/camera_3d.gd" id="1_jtl2d"]
+[ext_resource type="PackedScene" uid="uid://c6f8v51r4u8kt" path="res://assets/prefabs/tea_pot_prefab.tscn" id="2_v3q52"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_2t8uv"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ufd35"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_rx8ry"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.766044, -0.206086, -0.608855, 0, 0.94721, -0.320613, 0.642788, 0.245604, 0.725605, -2.85435, 0.953261, -0.0544497)
+far = 50.0
+script = ExtResource("1_jtl2d")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.999912, -0.00320466, -0.0128532, 0, 0.970296, -0.241922, 0.0132467, 0.241901, 0.970211, -0.203, 0.425, 2.387)
+shadow_enabled = true
+spot_range = 22.7546
+spot_attenuation = 0.0796601
+spot_angle = 24.3071
+spot_angle_attenuation = 0.683019
+
+[node name="PrototypeObject" parent="." instance=ExtResource("2_v3q52")]
+transform = Transform3D(0.499872, -0.00387413, -0.0106236, 0.00012544, 0.471611, -0.166081, 0.0113072, 0.166036, 0.471491, -0.203, 1.04956, -1.97929)
+
+[node name="Room" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_2t8uv")
+
+[node name="Floor" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(15.4716, 0, 0, 0, 0.172509, 0, 0, 0, 13.9652, 0, -0.811569, 0)
+mesh = SubResource("BoxMesh_ufd35")
+skeleton = NodePath("../..")
+
+[node name="Cellar" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(15.4716, 0, 0, 0, 0.172509, 0, 0, 0, 13.9652, 0.125854, 6.71422, 0)
+mesh = SubResource("BoxMesh_ufd35")
+skeleton = NodePath("../..")
+
+[node name="Wall" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.262704, 0, 0, 0, 7.50946, 0, 0, 0, 13.7726, -7.72854, 3.00469, -0.0298147)
+mesh = SubResource("BoxMesh_rx8ry")
+skeleton = NodePath("../..")
+
+[node name="Wall2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.262704, 0, 0, 0, 7.50946, 0, 0, 0, 13.7726, 7.79262, 3.00469, -0.0298147)
+mesh = SubResource("BoxMesh_rx8ry")
+skeleton = NodePath("../..")
+
+[node name="Wall3" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-1.14832e-08, 0, 15.8493, 0, 7.50946, 0, -0.262704, 0, -6.92796e-07, 0.0280957, 3.00469, -6.99102)
+mesh = SubResource("BoxMesh_rx8ry")
+skeleton = NodePath("../..")
+
+[node name="Wall4" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(-1.14832e-08, 0, 15.8493, 0, 7.50946, 0, -0.262704, 0, -6.92796e-07, 0.0280957, 3.00469, 6.83465)
+mesh = SubResource("BoxMesh_rx8ry")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20416, 0)
+omni_range = 12.7266
+omni_attenuation = 0.450625

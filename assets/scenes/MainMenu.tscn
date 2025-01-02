@@ -1,0 +1,168 @@
+[gd_scene load_steps=9 format=3 uid="uid://3hwg412s7duc"]
+
+[ext_resource type="Script" path="res://assets/scripts/menus/main_menu.gd" id="1_apc4f"]
+
+[sub_resource type="Animation" id="Animation_umqlk"]
+resource_name = "change_menu"
+length = 1.5
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0.25, 1, 0, 3, -2.6, 0.75, 1, 2, 3, -1.7, 1.25, 1, 3, 3, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0.25, 1, 0, 0, 0, 1, 1.25, 1, 0, -0.707, 0, 0.707)
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SpotLight3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0.25, 1, 0, 0.4, 2.4, 1.25, 1, -2.4, 0, 0)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SpotLight3D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0.25, 1, 0.122, 0, 0, 0.993, 1.25, 1, 0.086, -0.702, 0.086, 0.702)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../SpotLight3D:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../OmniLight3D:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.35, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ski8j"]
+_data = {
+"change_menu": SubResource("Animation_umqlk")
+}
+
+[sub_resource type="MultiMesh" id="MultiMesh_qv57s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_mcptf"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2heuc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sl6pl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boak8"]
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_apc4f")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2.6)
+far = 50.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.97026, -0.242066, 0, 0.242066, 0.97026, 0, 0.4, 2.4)
+shadow_enabled = true
+shadow_bias = 0.1
+shadow_blur = 10.0
+distance_fade_begin = 157.03
+distance_fade_shadow = 36.95
+distance_fade_length = 0.0
+spot_range = 22.7546
+spot_attenuation = 0.732044
+spot_angle = 29.1805
+spot_angle_attenuation = 5.09822
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.20416, 0)
+omni_range = 10.0
+omni_attenuation = 0.450625
+
+[node name="AnimationNode" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Camera3D")
+libraries = {
+"": SubResource("AnimationLibrary_ski8j")
+}
+
+[node name="Room2" type="MultiMeshInstance3D" parent="."]
+multimesh = SubResource("MultiMesh_qv57s")
+
+[node name="Floor" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(15.4716, 0, 0, 0, 0.172509, 0, 0, 0, 13.9652, 0, -0.811569, 0)
+mesh = SubResource("BoxMesh_mcptf")
+
+[node name="Cellar" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(15.4716, 0, 0, 0, 0.172509, 0, 0, 0, 13.9652, 0.125854, 6.71422, 0)
+mesh = SubResource("BoxMesh_mcptf")
+
+[node name="CameraWall" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(-1.14832e-08, 0, 15.8493, 0, 7.50946, 0, -0.262704, 0, -6.92796e-07, 0.0280957, 3.00469, -6.99102)
+mesh = SubResource("BoxMesh_2heuc")
+
+[node name="CameraWall2" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(0.262704, 0, 0, 0, 7.50946, 0, 0, 0, 13.7726, 7.82501, 3.00469, -0.0298147)
+mesh = SubResource("BoxMesh_2heuc")
+
+[node name="Wall" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(0.262704, 0, 0, 0, 7.50946, 0, 0, 0, 13.7726, -7.72854, 3.00469, -0.0298147)
+mesh = SubResource("BoxMesh_2heuc")
+
+[node name="Wall1" type="MeshInstance3D" parent="Room2"]
+transform = Transform3D(-1.14832e-08, 0, 15.8493, 0, 7.50946, 0, -0.262704, 0, -6.92796e-07, 0.0280957, 3.00469, 6.83465)
+mesh = SubResource("BoxMesh_2heuc")
+
+[node name="Level 1" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.2, 3, -2)
+mesh = SubResource("BoxMesh_sl6pl")
+skeleton = NodePath("../AnimationNode")
+
+[node name="Area3D" type="Area3D" parent="Level 1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level 1/Area3D"]
+shape = SubResource("BoxShape3D_boak8")
+
+[node name="Level 2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.2, 3, 0)
+mesh = SubResource("BoxMesh_sl6pl")
+skeleton = NodePath("../AnimationNode")
+
+[node name="Area3D" type="Area3D" parent="Level 2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level 2/Area3D"]
+shape = SubResource("BoxShape3D_boak8")
+
+[node name="Level 3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 7.2, 3, 2)
+mesh = SubResource("BoxMesh_sl6pl")
+skeleton = NodePath("../AnimationNode")
+
+[node name="Area3D" type="Area3D" parent="Level 3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Level 3/Area3D"]
+shape = SubResource("BoxShape3D_boak8")
+
+[connection signal="animation_finished" from="AnimationNode" to="AnimationNode" method="_on_animation_finished"]
+[connection signal="current_animation_changed" from="AnimationNode" to="AnimationNode" method="_on_current_animation_changed"]
+[connection signal="input_event" from="Level 1/Area3D" to="." method="_on_level_1_input_event"]
+[connection signal="input_event" from="Level 2/Area3D" to="." method="_on_level_2_input_event"]
+[connection signal="input_event" from="Level 3/Area3D" to="." method="_on_level_3_input_event"]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg5meq1g4lufr"]
+
+[ext_resource type="Script" path="res://assets/scripts/GameController.gd" id="1_1t7e0"]
+[ext_resource type="PackedScene" uid="uid://3hwg412s7duc" path="res://assets/scenes/MainMenu.tscn" id="2_et2h7"]
+[ext_resource type="PackedScene" uid="uid://b3pe0bq55wxau" path="res://assets/GUI/main_menu_gui.tscn" id="3_cqmun"]
+
+[node name="GameController" type="Node" node_paths=PackedStringArray("world_3d", "world_2d", "gui")]
+script = ExtResource("1_1t7e0")
+world_3d = NodePath("World3D")
+world_2d = NodePath("World2D")
+gui = NodePath("GUI")
+
+[node name="World3D" type="Node3D" parent="."]
+
+[node name="MainMenu" parent="World3D" instance=ExtResource("2_et2h7")]
+
+[node name="World2D" type="Node2D" parent="."]
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="MainMenuGUI" parent="GUI" instance=ExtResource("3_cqmun")]
+layout_mode = 1
